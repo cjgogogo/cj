@@ -1,0 +1,100 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style>
+        table {
+            width: 500px;
+            margin: 100px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #333;
+        }
+
+        tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <label>城市名称：<input id="aqi-city-input" type="text"></label><br>
+        <label>空气质量指数：<input id="aqi-value-input" type="text"></label><br>
+        <button id="add-btn">确认添加</button>
+
+    </div>
+    <table id="aqi-table">
+        <tr>
+            <th>城市</th>
+            <th>空气质量指数</th>
+            <th>操作</th>
+        </tr>
+    </table>
+    <script>
+        //获取表单和按钮
+        var input1 = document.querySelector('#aqi-city-input');
+        var input2 = document.querySelector('#aqi-value-input');
+        var aqiData = [];
+        var btn = document.getElementById("add-btn");
+        btn.addEventListener('click', function () {
+            var index = 0;
+            var flag = 1;
+            //验证第一个文本框内输入的是否为英文和中文
+            var regu = "^[a-zA-Z\u4e00-\u9fa5]+$";
+            var re = new RegExp(regu);
+            if (input1.value.search(re) == -1) {
+                flag = -1;
+                alert("请输入正确的数值,只允许输入英文和中文!")
+            }
+            //验证第二个文本框内输入的是否为整数
+            if (isNaN(Number(input2.value)) || Number(input2.value) <= 0 || !(/^\d+$/.test(Number(input2.value)))) {
+                alert("请输入正确的数值,只允许输入整数!");
+                flag = -1;
+            }
+            //如果是的话，将数据以对象的形式插入表格
+            if (flag == 1) {
+                aqiData[index] = {
+                    city: input1.value,
+                    data: Number(input2.value)
+                }
+
+                var tbody = document.querySelector('#aqi-table');
+                var tr = document.createElement('tr');
+                tbody.appendChild(tr);
+                for (var k in aqiData[index]) {
+                    //里面的for循环管列 td 单元格的数量取决于每个对象里面的属性个数 for循环遍历对象
+                    //创建单元格
+                    var td = document.createElement('td');
+                    td.innerHTML = aqiData[index][k];
+                    tr.appendChild(td);
+                }
+                // 创建有删除两个字的单元格
+                var td = document.createElement('td');
+                td.innerHTML = '<button>删除</button>';
+                tr.appendChild(td);
+            }
+
+            //删除操作
+            var btn1 = document.querySelectorAll('button');
+            for (var i = 0; i < btn1.length; i++) {
+                btn1[i].onclick = function () {
+                    //点击btn 删除 当前啊所在的行（btn的爸爸的爸爸) node.removeChild(child)
+                    tbody.removeChild(this.parentNode.parentNode);  
+                    index--;
+                }
+                index++;
+            }
+        })
+    </script>
+</body>
+
+</html>

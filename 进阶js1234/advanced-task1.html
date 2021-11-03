@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+  <style>
+       /* 去掉li 的小圆点 */
+      li {
+          list-style: none;
+      }
+      ul {
+        position: absolute;
+        width: 600%;
+    }
+   li {
+       float: left;
+       height: 40px;
+       background-color: pink;
+       margin: 0 20px 0 0px;
+       text-align: center;
+       line-height: 40px;
+
+   }
+  </style>
+<body>
+    <input type="text"> 
+    <button class="btn1">左侧入</button> 
+    <button class="btn2">右侧入</button>
+    <button class="btn3">左侧出</button>
+    <button class="btn4">右侧出</button>
+    <ul></ul>
+    <script>
+     window.onload=function() {
+            //获取元素
+        var input = document.querySelector('input');
+        var ul = document.querySelector('ul');
+        var btn1 = document.querySelector('.btn1');
+        var btn2 = document.querySelector('.btn2');
+        var btn3 = document.querySelector('.btn3');
+        var btn4 = document.querySelector('.btn4');
+
+        btn1.addEventListener('click',function() {        
+            if (input.value == '') {
+                return false;
+            } else {
+                //创建元素
+                var li = document.createElement('li');
+                //在前方添加元素
+                li.innerHTML = input.value;
+                ul.insertBefore(li,ul.children[0]);
+                
+                move();
+            }    
+        });
+        btn2.addEventListener('click',function() {   
+            if (input.value == '') {
+                return false;
+            } else {
+                //创建元素
+                var li = document.createElement('li');
+                //在后方添加元素
+                li.innerHTML = input.value;
+               ul.appendChild(li);
+               
+                move();
+            }
+            
+        });
+
+        btn3.addEventListener('click',function() {
+            //删除最前面的
+            ul.removeChild(ul.children[0]);
+            alert(ul.children[0].innerHTML);
+        });
+
+        btn4.addEventListener('click',function() {
+            // 删除最后面的
+            ul.removeChild(ul.children[ul.children.length-1]);
+            alert(ul.children[ul.children.length-1].innerHTML);
+        });    
+      
+     
+        
+        //点击li删除的函数
+        function move() {
+            var li = document.querySelector('li');
+            li.addEventListener('click',function() {
+                 alert(li.innerHTML);
+                 li.remove();
+                })
+                
+        }
+        
+     }
+    </script>
+</body>
+</html>

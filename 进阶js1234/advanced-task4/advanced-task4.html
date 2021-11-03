@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 去掉li 的小圆点 */
+    li {
+        list-style: none;
+    }
+   .Tag {
+        /* position: absolute; */
+        height: 100px;
+        width: 600%;
+    }
+    li {
+        float: left;
+        height: 40px;
+        background-color: pink;
+        margin: 20px 20px 0 0px;
+        text-align: center;
+        line-height: 40px;
+
+    }
+
+    .Tag li a {
+        float: left;
+    }
+
+</style>
+<script src="advanced-task4.js"></script>
+
+<body>
+    Tag: <input type="text" id="text"> 
+    <ul class="Tag">     
+    </ul>
+    兴趣：<textarea name="" id="love" cols="30" rows="10"></textarea> 
+    <button>确认输入爱好</button>
+    <ul class="ul2"></ul>
+</body>
+</html>

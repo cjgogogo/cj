@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>IFE JavaScript Task 01</title>
+</head>
+<style>
+  /* 去掉li 的小圆点 */
+  li {
+    list-style: none
+  }
+</style>
+
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+    <!--   
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+  <script type="text/javascript">
+
+    var aqiData = [
+      ["北京", 90],
+      ["上海", 50],
+      ["福州", 10],
+      ["广州", 80],
+      ["成都", 90],
+      ["西安", 100]
+    ];
+
+    //1.利用filter() 方法创建一个新数组,选出空气质量指数大于60的城市
+    var newData = aqiData.filter(function (item) {
+      return item[1] > 60;
+    });
+    //2.冒泡排序法对大于60的城市进行从大到小排序
+    for (var i = 0; i < newData.length - 1; i++) {
+      for (var j = 0; j < newData.length - i - 1; j++) {
+        if (newData[j][1] < newData[j + 1][1]) {
+          var temp = newData[j][1];
+          newData[j][1] = newData[j + 1][1];
+          newData[j + 1][1] = temp;
+        }
+      }
+    }
+
+    // 3. 利用DOM 在ul中添加子节点
+    var ul = document.querySelector('#aqi-list');
+    for (var i = 0; i < newData.length; i++) {
+      var li = document.createElement('li');
+      ul.appendChild(li);
+      li.innerHTML = '第' + convertToChinese(i + 1) + '名：' + newData[i][0] + ',' + newData[i][1];
+    }
+
+
+
+    //把数字型123...改为大写
+    function convertToChinese(num) {
+      var N = [
+        "零", "一", "二", "三", "四", "五", "六", "七", "八", "九"
+      ];
+      var str = num.toString();
+      var len = num.toString().length;
+      var C_Num = [];
+      for (var i = 0; i < len; i++) {
+        C_Num.push(N[str[i]]);
+      }
+      return C_Num.join('');
+    }
+  </script>
+</body>
+
+</html>
