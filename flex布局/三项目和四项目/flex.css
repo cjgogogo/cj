@@ -1,0 +1,66 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  flex-wrap: wrap;
+  align-content: center;
+  font-family: "Open Sans", sans-serif;
+  background: linear-gradient(top, #222, #333);
+}
+/* 设置盒子样式 */
+[class$="box"] {
+  display: flex;
+  /* flex-direction: row; */
+  margin: 50px;
+  padding: 4px;
+  background-color: #e7e7e7;
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  /* 被替换的内容将被缩放，以在填充元素的内容框时保持其宽高比。 整个对象在填充盒子的同时保留其长宽比，
+    因此如果宽高比与框的宽高比不匹配，该对象将被添加“黑边 */
+  box-shadow:
+      /* 内部阴影 */ inset 0 5px white, inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7, inset -5px 0 #d7d7d7;
+  border-radius: 10%;
+  overflow: hidden;
+}
+/* 设置圈圈样式 */
+.items {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+/* 三项目 */
+.box:nth-child(1) .items:nth-child(2) {
+  align-self: center;
+}
+.box:nth-child(1) .items:nth-child(3) {
+  align-self: flex-end;
+}
+/* 四项目 */
+.box:nth-child(2) {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  /* 与侧轴两边对齐 */
+  align-content: space-between;
+}
+
+.box:nth-child(3) {
+  /* 换行 */
+  flex-wrap: wrap;
+  /* 侧轴两端对齐 */
+  align-content: space-between;
+}
+.box:nth-child(3) .column {
+  /* flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。
+    它的默认值为auto，即项目的本来大小。 */
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+}
